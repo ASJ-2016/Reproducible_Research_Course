@@ -66,7 +66,14 @@ Then, we can plot the histogram using the `ggplot2` library to make fancier plot
 
 
 ```r
-suppressWarnings(library(ggplot2))
+library(ggplot2)
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.2.5
+```
+
+```r
 qplot(StepsPerDay, bins=10, asp = 0.5)+
   labs(title = "Histogram of Steps per day", x = "Steps per day", y = "Frequency")
 ```
@@ -172,7 +179,11 @@ First we need to transform the data type of date column to date. We can use the
 
 
 ```r
-suppressWarnings(library(lubridate))
+library(lubridate)
+```
+
+```
+## Warning: package 'lubridate' was built under R version 3.2.5
 ```
 
 ```
@@ -194,11 +205,11 @@ Choose if weekday or weekend. We can use the `dplyr' library to mutate values.
 
 
 ```r
-suppressWarnings(library(dplyr))
+library(dplyr)
 ```
 
 ```
-## Note: the specification for S3 class "difftime" in package 'DBI' seems equivalent to one from package 'lubridate': not turning on duplicate class definitions for this class.
+## Warning: package 'dplyr' was built under R version 3.2.5
 ```
 
 ```
@@ -227,7 +238,7 @@ suppressWarnings(library(dplyr))
 ```r
 data2<-data
 
-data2 <- mutate(data2, weektype = ifelse(weekdays(data2$date) == "Saturday" | weekdays(data2$date) == "Sunday", "weekend", "weekday"))
+data2 <- mutate(data2, weektype = ifelse(weekdays(data2$date) == "sábado" | weekdays(data2$date) == "domingo", "weekend", "weekday"))
 
 data2$weektype <- as.factor(data2$weektype)
 
@@ -242,6 +253,33 @@ head(data2)
 ## 4    NA 2012-10-01       15  weekday
 ## 5    NA 2012-10-01       20  weekday
 ## 6    NA 2012-10-01       25  weekday
+```
+
+```r
+str(data2)
+```
+
+```
+## 'data.frame':	17568 obs. of  4 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Date, format: "2012-10-01" "2012-10-01" ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  $ weektype: Factor w/ 2 levels "weekday","weekend": 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+```r
+summary(data2)
+```
+
+```
+##      steps             date               interval         weektype    
+##  Min.   :  0.00   Min.   :2012-10-01   Min.   :   0.0   weekday:12960  
+##  1st Qu.:  0.00   1st Qu.:2012-10-16   1st Qu.: 588.8   weekend: 4608  
+##  Median :  0.00   Median :2012-10-31   Median :1177.5                  
+##  Mean   : 37.38   Mean   :2012-10-31   Mean   :1177.5                  
+##  3rd Qu.: 12.00   3rd Qu.:2012-11-15   3rd Qu.:1766.2                  
+##  Max.   :806.00   Max.   :2012-11-30   Max.   :2355.0                  
+##  NA's   :2304
 ```
 
 Finally make a panel plot.

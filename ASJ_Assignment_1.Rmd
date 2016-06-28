@@ -140,11 +140,13 @@ library(dplyr)
 
 data2<-data
 
-data2 <- mutate(data2, weektype = ifelse(weekdays(data2$date) == "Saturday" | weekdays(data2$date) == "Sunday", "weekend", "weekday"))
+data2 <- mutate(data2, weektype = ifelse(weekdays(data2$date) == "sábado" | weekdays(data2$date) == "domingo", "weekend", "weekday"))
 
 data2$weektype <- as.factor(data2$weektype)
 
 head(data2)
+str(data2)
+summary(data2)
 ```
 
 Finally make a panel plot.
